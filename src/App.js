@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react"
+import "./App.css"
+import images from "./data"
 
 function App() {
+  const [tag, setTag] = useState("all")
+  const [filteredImages, setFilteredImages] = useState([])
+
+  useEffect(() => {
+    tag == "all"
+      ? setFilteredImages(images)
+      : setFilteredImages(images.filter((image) => image.tag === tag))
+  }, [tag])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div>
+        {filteredImages.map((image) => (
+          <div>{image.imageName}</div>
+        ))}
+      </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
